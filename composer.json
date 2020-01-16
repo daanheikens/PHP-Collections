@@ -3,13 +3,28 @@
   "description": "Functional Interface for PHP",
   "type": "library",
   "license": "MIT",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "config": {
     "platform": {
-      "php": "7.3.*"
+      "php": "7.3"
     }
   },
   "require": {
     "ext-ds": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "8.0.*",
+    "edgedesign/phpqa": "1.23.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "FI\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
   }
 }
