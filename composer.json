@@ -1,0 +1,15 @@
+{
+  "name": "heike/php-fi",
+  "description": "Functional Interface for PHP",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "config": {
+    "platform": {
+      "php": "7.3.*"
+    }
+  },
+  "require": {
+    "ext-ds": "*"
+  }
+}
