@@ -12,12 +12,14 @@
   },
   "require": {
     "ext-ds": "*",
-    "ext-xsl": "*"
+    "ext-xsl": "*",
+    "php-ds/php-ds": "1.2.*"
   },
   "require-dev": {
     "phpunit/phpunit": "8.0.*",
     "edgedesign/phpqa": "1.23.*",
-    "phpstan/phpstan": "0.12.*"
+    "phpstan/phpstan": "0.12.*",
+    "jakub-onderka/php-parallel-lint": "1.0.*"
   },
   "autoload": {
     "psr-4": {
