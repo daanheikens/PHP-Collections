@@ -3,11 +3,13 @@ declare(strict_types=1);
 
 namespace Fi\Collection;
 
+use Fi\Stream\StreamInterface;
+
 /**
  * Interface CollectionInterface
  * @package Fi\Collection
  */
-interface CollectionInterface extends \IteratorAggregate, \Countable
+interface CollectionInterface extends StreamInterface, \IteratorAggregate, \Countable
 {
     public function get(int $index);
 

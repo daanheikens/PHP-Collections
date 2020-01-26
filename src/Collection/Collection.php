@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Fi\Collection;
 
 use ArrayIterator;
+use Fi\Stream\StreamAccessor;
 
 /**
  * Class Collection
@@ -11,6 +12,8 @@ use ArrayIterator;
  */
 abstract class Collection implements CollectionInterface
 {
+    use StreamAccessor;
+
     /** @var array */
     protected $items;
 
