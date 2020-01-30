@@ -5,6 +5,10 @@ namespace Fi\Stream;
 
 use Fi\Collection\CollectionInterface;
 
+/**
+ * Class Stream
+ * @package Fi\Stream
+ */
 class Stream
 {
     /** @var CollectionInterface */

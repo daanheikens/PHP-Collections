@@ -16,8 +16,6 @@ abstract class Map implements MapInterface
 
     /**
      * Map constructor.
-     * @param string $keyType
-     * @param string $valueType
      * @param array $map
      */
     public function __construct(array $map = [])
@@ -25,22 +23,33 @@ abstract class Map implements MapInterface
         $this->map = $map;
     }
 
-    public function count()
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
     {
         return count($this->map);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function get($key)
     {
         return $this->map[$key] ?? null;
     }
 
-    public function add($key, $item): bool
+    /**
+     * @inheritDoc
+     */
+    public function add($key, $item): void
     {
         $this->map[$key] = $item;
-        return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function remove($key): bool
     {
         if (isset($this->map[$key])) {
@@ -50,16 +59,26 @@ abstract class Map implements MapInterface
         return false;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function isEmpty(): bool
     {
         return $this->count() === 0;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function clear(): void
     {
         $this->map = [];
     }
 
+    /**
+     * Method to return an iterator for this map
+     * @return ArrayIterator
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->map);
