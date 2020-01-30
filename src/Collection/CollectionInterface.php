@@ -3,19 +3,21 @@ declare(strict_types=1);
 
 namespace Fi\Collection;
 
-use Fi\Stream\StreamInterface;
+use Countable;
+use Fi\Stream\Stream;
+use IteratorAggregate;
 
 /**
  * Interface CollectionInterface
  * @package Fi\Collection
  */
-interface CollectionInterface extends StreamInterface, \IteratorAggregate, \Countable
+interface CollectionInterface extends IteratorAggregate, Countable
 {
-    public function get(int $index);
+    public function add($item): void;
 
-    public function add($item): bool;
+    public function addAll(array $items): void;
 
-    public function addAll(array $items): bool;
+    public function contains($item): bool;
 
     public function remove($item): bool;
 
@@ -26,4 +28,6 @@ interface CollectionInterface extends StreamInterface, \IteratorAggregate, \Coun
     public function isEmpty(): bool;
 
     public function clear(): void;
+
+    public function stream(): Stream;
 }

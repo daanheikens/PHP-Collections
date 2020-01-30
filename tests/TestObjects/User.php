@@ -2,6 +2,8 @@
 
 namespace Tests\TestObjects;
 
+use Tests\Collection\UserSet;
+
 /**
  * Class User
  * @package Tests\TestObjects
