@@ -28,7 +28,7 @@
     "lint": "parallel-lint --exclude vendor src/ tests/",
     "csfix": "phpcbf src/",
     "cscheck": "phpcs src/",
-    "phpstan": "phpstan analyse src/ -c phpstan.neon --level=7 --no-progress -vvv --memory-limit=1024M"
+    "phpstan": "phpstan analyse src/ -c phpstan.neon --level 7 --no-progress -vvv --memory-limit 2048M"
   },
   "autoload": {
     "psr-4": {
