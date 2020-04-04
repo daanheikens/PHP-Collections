@@ -10,7 +10,7 @@
       "email": "heikens1408@outlook.com",
       "role": "Developer"
     }
-  ]
+  ],
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
