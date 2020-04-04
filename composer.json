@@ -1,8 +1,16 @@
 {
   "name": "heike/php-fi",
   "description": "PHP collections with functional interface for PHP",
+  "keywords": ["data-structures", "functional-programming", "php-ds", "collection"]
   "type": "library",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Daan Heikens",
+      "email": "heikens1408@outlook.com",
+      "role": "Developer"
+    }
+  ]
   "minimum-stability": "dev",
   "prefer-stable": true,
   "config": {
@@ -32,7 +40,7 @@
     "lint": "parallel-lint --exclude vendor src/ tests/",
     "csfix": "phpcbf src/",
     "cscheck": "phpcs src/",
-    "phpstan": "phpstan analyse src/ -c phpstan.neon --level 7 --no-progress -vvv --memory-limit 2048M",
+    "phpstan": "phpstan analyse src/ -c phpstan.neon --level 7 --no-progress --memory-limit 2048M",
     "phpqa": "phpqa"
   },
   "autoload": {
@@ -42,6 +50,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FI\\Tests\\": "tests/"    }
+      "FI\\Tests\\": "tests/"    
+    }
   }
 }
