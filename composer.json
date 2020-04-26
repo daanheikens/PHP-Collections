@@ -19,7 +19,6 @@
     }
   },
   "require": {
-    "ext-ds": "*",
     "thecodingmachine/safe": "^1.0",
     "php-ds/php-ds": "^1.2"
   },
@@ -35,7 +34,10 @@
     "phpmd/phpmd": "@stable",
     "nette/neon": "^3.1",
     "sensiolabs/security-checker": "^6.0"
-  }, 
+  },
+  "suggest": {
+    "ext-ds": "More efficient data structures than php-ds/php-ds"
+  },
   "scripts": {
     "lint": "parallel-lint --exclude vendor src/ tests/",
     "csfix": "phpcbf src/",
@@ -50,7 +52,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FI\\Tests\\": "tests/"    
+      "FI\\": "tests/"
     }
   }
 }

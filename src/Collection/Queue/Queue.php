@@ -1,20 +1,32 @@
 <?php
+declare(strict_types=1);
 
 namespace Fi\Collection\Queue;
 
 use Ds\Queue as InternalQueue;
-use Fi\Collection\Collection;
+use Fi\Stream\QueueStream;
 
 /**
  * Class Queue
  * @package Fi\Collection\Queue
- * @method InternalQueue get()
  */
-final class Queue extends Collection
+final class Queue
 {
+    private InternalQueue $queue;
+
     public function __construct(array $data = [], int $capacity = InternalQueue::MIN_CAPACITY)
     {
-        parent::__construct(new InternalQueue($data));
-        $this->collection->allocate($capacity);
+        $this->queue = new InternalQueue($data);
+        $this->queue->allocate($capacity);
+    }
+
+    public function get(): InternalQueue
+    {
+        return $this->queue;
+    }
+
+    public function stream()
+    {
+        return new QueueStream($this->queue);
     }
 }

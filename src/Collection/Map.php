@@ -8,12 +8,28 @@ use Ds\Map as InternalMap;
 /**
  * Class Map
  * @package Fi\Collection
- * @method InternalMap get()
  */
-final class Map extends Collection
+final class Map
 {
+    private InternalMap $map;
+
     public function __construct(array $values = null)
     {
-        parent::__construct($values ? new InternalMap($values) : new InternalMap());
+        $this->map = $values ? new InternalMap($values) : new InternalMap();
+    }
+
+    public function get(): InternalMap
+    {
+        return $this->map;
+    }
+
+    public function entrySet(): Set
+    {
+        $entries = [];
+        foreach ($this->map as $key => $value) {
+            $entries[] = new MapEntry($key, $value);
+        }
+
+        return new Set($entries);
     }
 }

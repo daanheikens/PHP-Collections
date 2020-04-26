@@ -4,12 +4,10 @@ declare(strict_types=1);
 namespace FI\Tests\Collection;
 
 use Fi\Collection\Map;
-use Fi\Stream\Stream;
+use Fi\Stream\SetStream;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class MapTest
- * @package FI\Tests\Collection
  * @coversDefaultClass \Fi\Collection\Map
  */
 class MapTest extends TestCase
@@ -49,8 +47,8 @@ class MapTest extends TestCase
     public function testMapStream()
     {
         $map = new Map(['key1' => 1, 'key2' => 2, 'key3' => 3]);
-        $stream = new Stream($map->get());
+        $stream = new SetStream($map->entrySet()->get());
 
-        static::assertEquals($stream, $map->stream());
+        static::assertEquals($stream->toArray(), $map->entrySet()->get()->toArray());
     }
 }
