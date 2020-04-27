@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Collection;
+namespace Fi\Tests\Collection;
 
 use Fi\Collection\Set;
 use Fi\Stream\SetStream;

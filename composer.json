@@ -1,7 +1,12 @@
 {
   "name": "heike/php-fi",
   "description": "PHP collections with functional interface for PHP",
-  "keywords": ["data-structures", "functional-programming", "php-ds", "collection"],
+  "keywords": [
+    "data-structures",
+    "functional-programming",
+    "php-ds",
+    "collection"
+  ],
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -52,7 +57,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "FI\\": "tests/"
+      "Fi\\Tests\\": "tests/"
     }
   }
 }

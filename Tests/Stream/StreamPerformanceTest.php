@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Fi\Tests\Collection\Queue;
+namespace Fi\Tests\Stream;
 
 use PHPUnit\Framework\TestCase;
 
-class QueueTest extends TestCase
+class StreamPerformanceTest extends TestCase
 {
-    public function testGetQueue(): void
+    public function test()
     {
         $this->markTestSkipped();
     }

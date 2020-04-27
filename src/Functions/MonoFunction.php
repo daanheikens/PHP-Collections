@@ -5,5 +5,9 @@ namespace Fi\Functions;
 
 interface MonoFunction
 {
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function apply($value);
 }

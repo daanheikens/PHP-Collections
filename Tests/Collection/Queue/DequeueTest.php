@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Collection\Queue;
+namespace Fi\Tests\Collection\Queue;
 
 use Fi\Collection\Queue\Dequeue;
 use Fi\Stream\SetStream;

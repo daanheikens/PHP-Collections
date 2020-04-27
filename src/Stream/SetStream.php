@@ -72,7 +72,7 @@ final class SetStream
 
     /**
      * @param Collector $collector
-     * @return Map|Set
+     * @return Map|\Fi\Collection\Set
      */
     public function collect(Collector $collector)
     {
