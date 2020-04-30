@@ -20,7 +20,7 @@ final class Queue
         $this->queue->allocate($capacity);
     }
 
-    public function get(): InternalQueue
+    public function getData(): InternalQueue
     {
         return $this->queue;
     }

@@ -10,7 +10,6 @@ use Fi\Functions\MonoFunction;
 use Fi\Functions\Predicate\Predicate;
 use Fi\Functions\Scalar\ToFloatFunction;
 use Fi\Functions\Scalar\ToIntFunction;
-use Fi\Functions\SortFunction;
 use Fi\Stream\Collectors\Collector;
 
 final class SetStream
@@ -47,7 +46,7 @@ final class SetStream
     public function filter(Predicate $predicate): self
     {
         foreach ($this->set as $item) {
-            if ($predicate->test($item)) {
+            if (!$predicate->test($item)) {
                 $this->set->remove($item);
             }
         }
@@ -64,9 +63,9 @@ final class SetStream
         return $this;
     }
 
-    public function sort(?SortFunction $sortFunction): self
+    public function sort(?CallableComparator $comparator): self
     {
-        $this->set->sort($sortFunction);
+        $this->set->sort($comparator);
         return $this;
     }
 

@@ -6,6 +6,7 @@ namespace Fi\Collection;
 final class MapEntry
 {
     private string $key;
+    /** @var mixed */
     private $value;
 
     public function __construct(string $key, $value)

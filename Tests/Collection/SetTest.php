@@ -21,12 +21,12 @@ class SetTest extends TestCase
         $set = new Set();
         $set2 = new Set($expected);
 
-        static::assertCount(0, $set->get());
-        static::assertCount(2, $set2->get());
+        static::assertCount(0, $set->getData());
+        static::assertCount(2, $set2->getData());
     }
 
     /**
-     * @covers ::get
+     * @covers ::getData
      */
     public function testSetValues(): void
     {
@@ -34,7 +34,7 @@ class SetTest extends TestCase
         $set = new Set($expected);
 
         $actual = [];
-        foreach ($set->get() as $idx => $value) {
+        foreach ($set->getData() as $idx => $value) {
             $actual[$idx] = $value;
         }
 
@@ -47,7 +47,7 @@ class SetTest extends TestCase
     public function testSetStream()
     {
         $set = new Set([1, 2, 3]);
-        $stream = new SetStream($set->get());
+        $stream = new SetStream($set->getData());
 
         static::assertEquals($stream, $set->stream());
     }

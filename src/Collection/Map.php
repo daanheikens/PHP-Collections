@@ -13,12 +13,12 @@ final class Map
 {
     private InternalMap $map;
 
-    public function __construct(array $values = null)
+    public function __construct(array $values = [])
     {
-        $this->map = $values ? new InternalMap($values) : new InternalMap();
+        $this->map = new InternalMap($values);
     }
 
-    public function get(): InternalMap
+    public function getData(): InternalMap
     {
         return $this->map;
     }

@@ -5,18 +5,19 @@ namespace Fi\Stream\Collectors;
 
 use Fi\Collection\Map;
 use Fi\Collection\Set;
+use Fi\Functions\Consumer\BiConsumer;
 
 final class Collector
 {
     /** @var Map|Set */
     private $targetCollection;
-    /** @var callable */
-    private $transformer;
 
-    public function __construct($targetCollection, callable $transformer)
+    private BiConsumer $accumulator;
+
+    public function __construct($targetCollection, BiConsumer $accumulator)
     {
         $this->targetCollection = $targetCollection;
-        $this->transformer = $transformer;
+        $this->accumulator = $accumulator;
     }
 
     /**
@@ -25,7 +26,7 @@ final class Collector
      */
     public function collect(array $collectionValues)
     {
-        call_user_func_array($this->transformer, [$this->targetCollection, $collectionValues]);
+        $this->accumulator->consume($this->targetCollection, $collectionValues);
         return $this->targetCollection;
     }
 }

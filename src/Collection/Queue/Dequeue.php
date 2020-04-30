@@ -12,7 +12,7 @@ use Ds\Deque as InternalDeque;
  */
 final class Dequeue
 {
-    private Deque $deque;
+    private InternalDeque $deque;
 
     public function __construct(array $data = [], int $capacity = InternalDeque::MIN_CAPACITY)
     {
@@ -20,7 +20,7 @@ final class Dequeue
         $this->deque->allocate($capacity);
     }
 
-    public function get(): Deque
+    public function getData(): InternalDeque
     {
         return $this->deque;
     }

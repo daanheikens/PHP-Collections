@@ -21,12 +21,12 @@ class MapTest extends TestCase
         $map = new Map();
         $map2 = new Map($expected);
 
-        static::assertCount(0, $map->get());
-        static::assertCount(2, $map2->get());
+        static::assertCount(0, $map->getData());
+        static::assertCount(2, $map2->getData());
     }
 
     /**
-     * @covers ::get
+     * @covers ::getData
      */
     public function testMapValues(): void
     {
@@ -34,7 +34,7 @@ class MapTest extends TestCase
         $map = new Map($expected);
 
         $actual = [];
-        foreach ($map->get() as $key => $value) {
+        foreach ($map->getData() as $key => $value) {
             $actual[$key] = $value;
         }
 
@@ -47,8 +47,8 @@ class MapTest extends TestCase
     public function testMapStream()
     {
         $map = new Map(['key1' => 1, 'key2' => 2, 'key3' => 3]);
-        $stream = new SetStream($map->entrySet()->get());
+        $stream = new SetStream($map->entrySet()->getData());
 
-        static::assertEquals($stream->toArray(), $map->entrySet()->get()->toArray());
+        static::assertEquals($stream->toArray(), $map->entrySet()->getData()->toArray());
     }
 }

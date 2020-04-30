@@ -14,12 +14,12 @@ final class Set
 {
     private InternalSet $set;
 
-    public function __construct(array $values = null)
+    public function __construct(array $values = [])
     {
-        $this->set = $values ? new InternalSet($values) : new InternalSet();
+        $this->set = new InternalSet($values);
     }
 
-    public function get()
+    public function getData()
     {
         return $this->set;
     }

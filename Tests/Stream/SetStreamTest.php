@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace Fi\Tests\Stream;
 
 use Fi\Collection\Set;
+use Fi\Functions\BiFunction;
+use Fi\Functions\Consumer\Consumer;
 use Fi\Functions\MonoFunction;
+use Fi\Functions\Predicate\Predicate;
 use Fi\Stream\Collectors\Collectors;
 use Fi\Tests\Objects\User;
 use PHPUnit\Framework\TestCase;
@@ -78,10 +81,7 @@ class SetStreamTest extends TestCase
             ->stream()
             ->map(
                 new class implements MonoFunction {
-                    /**
-                     * @param User $value
-                     * @return User
-                     */
+                    /** @param User $value */
                     public function apply($value): User
                     {
                         $value->setId(0);
@@ -90,11 +90,82 @@ class SetStreamTest extends TestCase
                     }
                 }
             )
-            ->collect(Collectors::toMap('getName', 'getId'));
+            ->collect(
+                Collectors::toMap(
+                    new class implements MonoFunction {
+                        /** @param User $value */
+                        public function apply($value): string
+                        {
+                            return $value->getName();
+                        }
+                    },
+                    new class implements MonoFunction {
+                        /** @param User $value */
+                        public function apply($value): int
+                        {
+                            return $value->getId();
+                        }
+                    }
+                )
+            );
 
-        foreach ($mapFromSet->get() as $key => $value) {
+        foreach ($mapFromSet->getData() as $key => $value) {
             static::assertSame('Hans', $key);
             static::assertSame(0, $value);
+        }
+    }
+
+    /**
+     * @covers ::collect
+     */
+    public function testCollectShouldReturnMapWithMergeFunction()
+    {
+        $mapFromSet = $this->set
+            ->stream()
+            ->map(
+                new class implements MonoFunction {
+                    /** @param User $value */
+                    public function apply($value): User
+                    {
+                        $value->setId(0);
+                        $value->setName('Hans');
+                        return $value;
+                    }
+                }
+            )
+            ->collect(
+                Collectors::toMap(
+                    new class implements MonoFunction {
+                        /** @param User $value */
+                        public function apply($value): string
+                        {
+                            return $value->getName();
+                        }
+                    },
+                    new class implements MonoFunction {
+                        /** @param User $value */
+                        public function apply($value): int
+                        {
+                            return $value->getId();
+                        }
+                    },
+                    new class implements BiFunction {
+                        /**
+                         * @param int $valueA
+                         * @param int $valueB
+                         * @return mixed
+                         */
+                        public function apply($valueA, $valueB)
+                        {
+                            return $valueA . $valueB;
+                        }
+                    }
+                )
+            );
+
+        foreach ($mapFromSet->getData() as $key => $value) {
+            static::assertSame('Hans', $key);
+            static::assertSame($key === 0 ? 0 : '00', $value);
         }
     }
 
@@ -122,7 +193,7 @@ class SetStreamTest extends TestCase
             ->collect(Collectors::toSet());
 
         /** @var User $item */
-        foreach ($newSetFromSet->get() as $item) {
+        foreach ($newSetFromSet->getData() as $item) {
             static::assertSame(0, $item->getId());
             static::assertSame('Hans', $item->getName());
         }
@@ -133,7 +204,22 @@ class SetStreamTest extends TestCase
      */
     public function testFilter()
     {
-        $this->markTestSkipped();
+        $newSetFromSet = $this->set
+            ->stream()
+            ->filter(new class implements Predicate {
+                /** @param User $value */
+                public function test($value): bool
+                {
+                    return $value->getId() === 1;
+                }
+            })
+            ->collect(Collectors::toSet());
+
+        /** @var User $item */
+        foreach ($newSetFromSet->getData() as $item) {
+            static::assertSame(1, $item->getId());
+            static::assertSame('Joost', $item->getName());
+        }
     }
 
     /**
@@ -141,7 +227,14 @@ class SetStreamTest extends TestCase
      */
     public function testFindFirst()
     {
-        $this->markTestSkipped();
+        /** @var User $user */
+        $user = $this->set
+            ->stream()
+            ->findFirst();
+
+        /** @var User $item */
+        static::assertSame(1, $user->getId());
+        static::assertSame('Joost', $user->getName());
     }
 
     /**
@@ -149,7 +242,25 @@ class SetStreamTest extends TestCase
      */
     public function testForEach()
     {
-        $this->markTestSkipped();
+        $user = new User(3, 'Foo');
+        $this->set
+            ->stream()
+            ->forEach(new class($user) implements Consumer {
+                private User $testValue;
+
+                public function __construct(User $testValue)
+                {
+                    $this->testValue = $testValue;
+                }
+
+                /** @param User $value */
+                public function consume($value): void
+                {
+                    $this->testValue->setId($this->testValue->getId() + ($value->getId() * 2));
+                }
+            });
+
+        static::assertSame(9, $user->getId());
     }
 
     /**

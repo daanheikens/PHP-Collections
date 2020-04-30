@@ -4,6 +4,11 @@
 
     <!-- Include rules of the default PSR2 coding standard -->
     <rule ref="PSR2"/>
-
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="150"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
+    </rule>
     <config name="testVersion" value="7.4"/>
 </ruleset>

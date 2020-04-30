@@ -15,7 +15,7 @@ final class PriorityQueue
         $this->queue->allocate($capacity);
     }
 
-    public function get(): InternalPriorityQueue
+    public function getData(): InternalPriorityQueue
     {
         return $this->queue;
     }

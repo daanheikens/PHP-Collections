@@ -21,17 +21,17 @@ class DequeueTest extends TestCase
         $dequeue = new Dequeue();
         $dequeue2 = new Dequeue([], 2);
         $dequeue3 = new Dequeue([1, 2, 3, 4], 16);
-        static::assertCount(0, $dequeue->get());
-        static::assertCount(0, $dequeue2->get());
-        static::assertCount(4, $dequeue3->get());
-        static::assertSame(8, $dequeue->get()->capacity());
+        static::assertCount(0, $dequeue->getData());
+        static::assertCount(0, $dequeue2->getData());
+        static::assertCount(4, $dequeue3->getData());
+        static::assertSame(8, $dequeue->getData()->capacity());
         // Min capacity === 8
-        static::assertSame(8, $dequeue2->get()->capacity());
-        static::assertSame(16, $dequeue3->get()->capacity());
+        static::assertSame(8, $dequeue2->getData()->capacity());
+        static::assertSame(16, $dequeue3->getData()->capacity());
     }
 
     /**
-     * @covers ::get
+     * @covers ::getData
      */
     public function testDequeueValues(): void
     {
@@ -40,15 +40,15 @@ class DequeueTest extends TestCase
         $dequeue2 = new Dequeue($expected);
 
         foreach ($expected as $value) {
-            $item = $dequeue->get()->first();
+            $item = $dequeue->getData()->first();
             static::assertSame($value, $item);
-            $dequeue->get()->remove($dequeue->get()->find($item));
+            $dequeue->getData()->remove($dequeue->getData()->find($item));
         }
 
         foreach (array_reverse($expected) as $value) {
-            $item = $dequeue2->get()->last();
+            $item = $dequeue2->getData()->last();
             static::assertSame($value, $item);
-            $dequeue2->get()->remove($dequeue2->get()->find($item));
+            $dequeue2->getData()->remove($dequeue2->getData()->find($item));
         }
     }
 }
