@@ -8,6 +8,8 @@ use Fi\Functions\BiFunction;
 use Fi\Functions\Consumer\Consumer;
 use Fi\Functions\MonoFunction;
 use Fi\Functions\Predicate\Predicate;
+use Fi\Functions\Scalar\ToFloatFunction;
+use Fi\Functions\Scalar\ToIntFunction;
 use Fi\Stream\Collectors\Collectors;
 use Fi\Tests\Objects\User;
 use PHPUnit\Framework\TestCase;
@@ -268,7 +270,20 @@ class SetStreamTest extends TestCase
      */
     public function testMapToFloat()
     {
-        $this->markTestSkipped();
+        $floatArray = $this->set
+            ->stream()
+            ->mapToFloat(new class implements ToFloatFunction {
+                private int $incrementValue = 2;
+
+                /** @param User $value */
+                public function applyAsFloat($value): float
+                {
+                    return (float)($value->getId() + $this->incrementValue);
+                }
+            })
+            ->toArray();
+
+        static::assertSame([3.0, 4.0], $floatArray);
     }
 
     /**
@@ -276,7 +291,20 @@ class SetStreamTest extends TestCase
      */
     public function testMapToInt()
     {
-        $this->markTestSkipped();
+        $intArray = $this->set
+            ->stream()
+            ->mapToInt(new class implements ToIntFunction {
+                private int $incrementValue = 4;
+
+                /** @param User $value */
+                public function applyAsInt($value): int
+                {
+                    return $value->getId() + $this->incrementValue;
+                }
+            })
+            ->toArray();
+
+        static::assertSame([5, 6], $intArray);
     }
 
     /**

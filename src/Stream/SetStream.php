@@ -11,6 +11,7 @@ use Fi\Functions\Predicate\Predicate;
 use Fi\Functions\Scalar\ToFloatFunction;
 use Fi\Functions\Scalar\ToIntFunction;
 use Fi\Stream\Collectors\Collector;
+use Fi\Util\CallableComparator;
 
 final class SetStream
 {
@@ -63,9 +64,13 @@ final class SetStream
         return $this;
     }
 
-    public function sort(?CallableComparator $comparator): self
+    public function sort(CallableComparator $comparator = null): self
     {
-        $this->set->sort($comparator);
+        if ($comparator instanceof CallableComparator) {
+            $this->set->sort($comparator);
+        } else {
+            $this->set->sort();
+        }
         return $this;
     }
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Fi\Stream;
+namespace Fi\Util;
 
 interface CallableComparator
 {

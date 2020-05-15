@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Fi\Util;
 
-use Fi\Stream\CallableComparator;
-
 class CallableScalarComparator implements CallableComparator
 {
     /**

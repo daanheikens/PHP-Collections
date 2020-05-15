@@ -15,4 +15,9 @@ final class IntStream
     {
         $this->values = $values;
     }
+
+    public function toArray(): array
+    {
+        return $this->values;
+    }
 }

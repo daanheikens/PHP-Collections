@@ -15,4 +15,9 @@ final class FloatStream
     {
         $this->values = $values;
     }
+
+    public function toArray(): array
+    {
+        return $this->values;
+    }
 }
